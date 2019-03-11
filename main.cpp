@@ -7,7 +7,8 @@ using namespace std;
 
 int main () {
 
-	test();
+	int drivers, races, prints;
+	solve(drivers, races, prints);
 
 	return 0;
 }
