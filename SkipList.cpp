@@ -30,7 +30,6 @@ void solve(int &drivers, int &races, int &prints) {
     		}
     		// parcurg lista si dau puncte in vector cu numar de puncte si vector "precedent"
     		// salvez in vector "precendent" lapurile astea
-    		// clear list actuala
 		}
 		else {
     		// dau checkout sa vad clasament cu o functie
