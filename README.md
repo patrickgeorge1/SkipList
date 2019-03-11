@@ -3,6 +3,13 @@
 https://ocw.cs.pub.ro/courses/sd-ca/teme/tema1
 
 
+~some documentation~
+https://www.sanfoundry.com/c-program-implement-skip-list/
+https://www.youtube.com/watch?v=ypod5jeYzAU
+https://www.youtube.com/watch?v=Q9MdwzewSZg
+https://www.youtube.com/watch?v=iaKu6jaKPFw
+
+
 Intorducere
 
 Piciorus este pasionat de curse de masini. El are o lista cu n concurenti pe care ii urmareste de-a lungul unui campionat format din m curse. Problema lui Piciorus este ca nu toti concurentii participa la toate cursele si ii este greu sa tina un clasament al acestora. Asa ca va cere voua ca din cand in cand sa afisati clasamentul rezultat in urma curselor desfasurate.
