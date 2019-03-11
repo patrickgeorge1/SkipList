@@ -3,14 +3,8 @@
 https://ocw.cs.pub.ro/courses/sd-ca/teme/tema1
 
 
-~some documentation~
-https://www.sanfoundry.com/c-program-implement-skip-list/
-https://www.youtube.com/watch?v=ypod5jeYzAU
-https://www.youtube.com/watch?v=Q9MdwzewSZg
-https://www.youtube.com/watch?v=iaKu6jaKPFw
 
-
-Intorducere
+## Intorducere
 
 Piciorus este pasionat de curse de masini. El are o lista cu n concurenti pe care ii urmareste de-a lungul unui campionat format din m curse. Problema lui Piciorus este ca nu toti concurentii participa la toate cursele si ii este greu sa tina un clasament al acestora. Asa ca va cere voua ca din cand in cand sa afisati clasamentul rezultat in urma curselor desfasurate.
 Desfasurarea campionatului
@@ -48,7 +42,7 @@ id = 5, primeste 0 puncte (pentru ca nu a participat)
 //In cazul in care 2 concurenti au acelasi timp, vor fi departajati dupa pozitia ocupata in clasamentul anterior cursei actuale.
 
 
-Operatii
+## Operatii
 
 Veti gasi in fisierul de intrare k operatii de tip “print”.
 O operatie de tip print afiseaza clasamentul in ordinea descrescatoare a punctajelor.
@@ -56,12 +50,12 @@ Pentru fiecare competitor vor fi afisate 3 numere: ID-ul, Nr. de puncte acumulat
 Daca un competitor a urcat doua pozitii in clasament fata de print-ul trecut, Diferenta de nivel = 2, iar daca a coborat 3 pozitii, Diferenta de nivel = -3.
 
 
-Cerinta
+## Cerinta
 
 Creati un program care sa il ajute pe Piciorus sa isi urmareasca favoritii din campionatul descris mai sus.
 
 
-Input
+## Input
 
 Pe prima linie se vor afla 3 numere n, m si k, reprezentand numarul de competitori, numarul de curse si numarul de print-uri.
 Pe urmatoarele m + k linii se pot afla:
@@ -72,7 +66,7 @@ Citirea se va face din fisierul race.in
 //Se garanteaza ca vor fi fix m curse si fix k print-uri.
 
 
-Output
+## Output
 
 In fisierul de output se vor gasi n*(k + 1) linii (k clasamente, dupa fiecare clasament se va afisa o linie goala), fiecare linie continand 3 numere separate printr-un spatiu: ID-ul, Nr. de puncte acumulate de la inceputul campionatului si Diferenta de nivel din clasament fata de print-ul trecut.
 Afisarea se va face in fisierul race.out
@@ -80,7 +74,7 @@ Afisarea se va face in fisierul race.out
 //Pentru primul print Diferenta de nivel va fi 0 pentru toti participantii.
 
 
-Exemplu
+## Exemplu
 
 in:
 5 5 2
@@ -106,7 +100,21 @@ al doilea print
 2 -2 -2
 4 -4 0
 
-Restrictii si precizari
+## Restrictii si precizari
 
 Atenție! Structurile de date trebuie sa fie implementate generic.
 0 < n < 1000
+
+
+
+
+
+  ## Some documentation:
+
+https://www.sanfoundry.com/c-program-implement-skip-list/
+
+https://www.youtube.com/watch?v=ypod5jeYzAU
+
+https://www.youtube.com/watch?v=Q9MdwzewSZg
+
+https://www.youtube.com/watch?v=iaKu6jaKPFw
