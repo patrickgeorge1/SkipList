@@ -47,7 +47,7 @@ public:
 	}
 
 	~SkipList() {
-
+		
 	}
 
 	void search() {
@@ -220,7 +220,7 @@ public:
 		srand((unsigned)time(0)); 
 		int i = (rand()%2);
 		//cout << i << endl;
-		return 1;
+		return i;
 	}
 };
 
