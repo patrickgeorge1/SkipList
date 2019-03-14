@@ -23,7 +23,7 @@ void solve(int &drivers, int &races, int &prints) {
 	for (int i = 1; i <= races + prints ; ++i)
 	{
 		
-		SkipList result;
+		SkipList result(drivers * drivers);
 		int time;
 		string input;
 		cin >> input;
@@ -36,29 +36,29 @@ void solve(int &drivers, int &races, int &prints) {
 				cin >> input;
 				time = std::stoi(input);
 				Dictionary dataOther(j, time);
-				result.add_beetween(dataOther);
+				result.add(dataOther);
 			}
 
 
-			//test -- start
-			int time_test;
-			cout << "test a insert   ex 6,13" << endl;
-			cin >> time_test; 
-			Dictionary test(drivers+1, time_test);
-			result.add(test);
-			cout << "test when floors > 0 " << endl << "enter 13"<<endl;
-			cin >> time_test;
-			Dictionary test2(drivers+2, time_test);
-			result.add(test2);
+			// //test -- start
+			// int time_test;
+			// cout << "test a insert   ex 6,13" << endl;
+			// cin >> time_test; 
+			// Dictionary test(drivers+1, time_test);
+			// result.add(test);
+			// cout << "test when floors > 0 " << endl << "enter 13"<<endl;
+			// cin >> time_test;
+			// Dictionary test2(drivers+2, time_test);
+			// result.add(test2);
 
-			cout << "test when floors > 1 " << endl << "enter 24"<<endl;
-			cin >> time_test;
-			Dictionary test3(drivers+3, time_test);
-			result.add(test3);
-			//test -- end
+			// cout << "test when floors > 1 " << endl << "enter 24"<<endl;
+			// cin >> time_test;
+			// Dictionary test3(drivers+3, time_test);
+			// result.add(test3);
+			// //test -- end
 
 
-
+			cout << "before destructor " << endl;
 			result.search();
 		}
 		else
@@ -68,6 +68,7 @@ void solve(int &drivers, int &races, int &prints) {
 			// vector puncte descrescator
 		}
 		//cout << "x20..." << endl;
+		cout << "after destructor" << endl;
 	}
 
 	delete[] laps;

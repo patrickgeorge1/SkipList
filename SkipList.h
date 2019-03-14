@@ -33,10 +33,14 @@ private:
 	Node *head;
 	Node *tail;
 	int height;
+	Node **address;
+	int index_address;
+	int drivers;
 
 public:
 
-	SkipList() {
+	SkipList(int drivers) {
+		this->drivers = drivers;
 		height = 0;
 		Dictionary data1(0, -1);
 		Dictionary data2(0, 10001);
@@ -44,12 +48,57 @@ public:
 		tail = new Node(data2);
 		head->next = tail;
 		tail->prev = head;
+		address = new Node* [drivers * drivers];
+		for (int i = 0; i < drivers * drivers; ++i)
+		{
+			address[i] = nullptr;
+		}
+		index_address = 0;
+		address[0] = head;
+		address[1] = tail;
+		index_address += 2;
+	}
+
+	void remove_column(Node *botom) {
+		Node *iterator = botom->up;;
+		Node *save = iterator;
+		while(iterator) {
+			delete iterator->down;
+			save = iterator;
+			iterator = iterator->up;
+		}
+		delete save;
+
 	}
 
 	~SkipList() {
-		
-	}
+		// Node *now_head = head;    // cu asta oarcurg pe vert
+		// Node *bottom = head;
+		// while (now_head != nullptr) {
+		// 	bottom = now_head;
+		// 	now_head = now_head->down;
+		// }
+		// bottom = bottom->next;
+		// Node *last = bottom;
+		// while(bottom != nullptr) {
+		// 	remove_column(bottom->prev);
+		// 	last = bottom;
+		// 	bottom = bottom->next;
+		// }
+		// remove_column(last);
+		// delete head;
+		// delete tail;
 
+
+		// Safe delete
+
+		for (int i = 0; i < drivers * drivers; ++i)
+		{
+			delete address[i];
+		}
+		delete[] address;
+	}
+// fara trisat
 	void search() {
 		Node *now = head;
 		for (int i = 1; i <= height; ++i)
@@ -72,10 +121,12 @@ public:
 		added->prev = tail->prev;
 		tail->prev->next =added;
 		tail->prev =added;
+		address[index_address] = added;
+		index_address++;
 		
 	}
 
-	void add(Dictionary data) {             
+void add(Dictionary data) {             
 		Node *added = new Node(data);
 		Node *up_left = head;
 		if(height != 0)
@@ -97,6 +148,8 @@ public:
 			//	cout << "dupa ultima coborare" << endl;
 			}
 			//   trebuie sa inserez in dreapta nodului last
+			address[index_address] = added;
+			index_address++;
 			added->next = last->next;
 			added->prev = last;
 			last->next->prev = added;
@@ -111,6 +164,8 @@ public:
 				floor->down =added;
 				added->up = floor;
 				added = added->up;
+				address[index_address] = added;
+				index_address++;
 				i++;
 
 			}
@@ -122,6 +177,10 @@ public:
 				Dictionary data2(0, 10001);
 				Node *head_s = new Node(data1);
 				Node *head_d = new Node(data2);
+				address[index_address] = head_s;
+				index_address++;
+				address[index_address] = head_d;
+				index_address++;
 				head_s->down = head;
 				head_s->next = added;
 				added->prev = head_s;
@@ -179,6 +238,8 @@ public:
 				up_left = up_left->next;
 			}
 			up_left->next->prev = added;
+			address[index_address] = added;
+			index_address++;
 			added->next = up_left->next;
 			added->prev = up_left;
 			up_left->next = added;
@@ -190,6 +251,8 @@ public:
 				floor->down =added;
 				added->up = floor;
 				added = added->up;
+				address[index_address] = added;
+				index_address++;
 				i++;
 
 			}
@@ -199,6 +262,10 @@ public:
 				Dictionary data2(0, 10001);
 				Node *head_s = new Node(data1);
 				Node *head_d = new Node(data2);
+				address[index_address] = head_s;
+				index_address++;
+				address[index_address] = head_d;
+				index_address++;
 				head_s->down = head;
 				head_s->next = added;
 				added->prev = head_s;
