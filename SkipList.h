@@ -130,7 +130,7 @@ public:
 		for (int i = 2; i <= drivers; ++i)
 		{
 			int y = times[i];
-			if(y == x)     // au scos acc timp si sunt consecutive 
+			if(y == x && x != 1001)     // au scos acc timp si sunt consecutive 
 			{
 				int car1 = 0;
 				int car2 = 0;
@@ -154,7 +154,7 @@ public:
 
 		for (int i = 1; i <= drivers; ++i)
 		{
-			cout << "zzzzz lap " << laps[i]<<endl;
+			//cout << "zzzzz lap " << laps[i]<<endl;
 			//cout << "zzzzz car " << car_ind[i] << " on time " << times[i]<<endl;
 		}
 
@@ -179,14 +179,14 @@ void add(Dictionary data) {
 		Node *up_left = head;
 		if(height != 0)
 		{
-			cout << "already one floor" << endl;
+			//cout << "already one floor" << endl;
 			Node *last = up_left;
 			while(up_left != nullptr)
 			{
-				cout <<endl << "entered once vertical" << endl;
+				//cout <<endl << "entered once vertical" << endl;
 				while(up_left->next->data.time < added->data.time)
 				{
-					cout <<endl << "entered once orizontal" << endl;
+					//cout <<endl << "entered once orizontal" << endl;
 					up_left = up_left->next;
 				}
 				last = up_left;
@@ -207,7 +207,7 @@ void add(Dictionary data) {
 			int i = 0;
 			while(flip_coin() && i<=height)   // construiesc etaje
 			{
-				cout << endl << "floor "<< i+1 << "for "<< added->data.time  <<endl;
+				//cout << endl << "floor "<< i+1 << "for "<< added->data.time  <<endl;
 				Node *floor = new Node(data);
 				floor->down =added;
 				added->up = floor;
@@ -220,7 +220,7 @@ void add(Dictionary data) {
 			int number_of_links = i;
 			int ok = 0;   // nu am construit un etaj extra
 			if(height < i) {               // daca cumva fac un nivel in plus
-				cout << "setting margins for now floor of "<< added->data.time << endl;
+				//cout << "setting margins for now floor of "<< added->data.time << endl;
 				Dictionary data1(0, -1);
 				Dictionary data2(0, 10001);
 				Node *head_s = new Node(data1);
@@ -264,7 +264,7 @@ void add(Dictionary data) {
 				{
 					iterator_orizontal = iterator_orizontal->next;
 				}
-				cout << added->data.time << " was inserted on line "<< i << " in stanga lui " << iterator_orizontal->data.time<<endl;
+				//cout << added->data.time << " was inserted on line "<< i << " in stanga lui " << iterator_orizontal->data.time<<endl;
 				added->next = iterator_orizontal->next;
 				added->prev = iterator_orizontal;
 				iterator_orizontal->next->prev = added;
@@ -282,7 +282,7 @@ void add(Dictionary data) {
 		{
 			while(up_left->next->data.time < added->data.time)
 			{
-				cout <<endl << "entered once orizontal --" << endl;
+				//cout <<endl << "entered once orizontal --" << endl;
 				up_left = up_left->next;
 			}
 			up_left->next->prev = added;
@@ -294,7 +294,7 @@ void add(Dictionary data) {
 			int i = 0;
 			while(flip_coin() && i<=height)
 			{
-				cout << endl << "new floor" <<endl;
+				//cout << endl << "new floor" <<endl;
 				Node *floor = new Node(data);
 				floor->down =added;
 				added->up = floor;
@@ -305,7 +305,7 @@ void add(Dictionary data) {
 
 			}
 			if(height < i) {
-				cout << "setting margins for now floor" << endl;
+				//cout << "setting margins for now floor" << endl;
 				Dictionary data1(0, -1);
 				Dictionary data2(0, 10001);
 				Node *head_s = new Node(data1);
@@ -325,7 +325,7 @@ void add(Dictionary data) {
 
 			}
 			height = i;
-			cout << "numbers of floors except base = " << height<< endl;	
+			//cout << "numbers of floors except base = " << height<< endl;	
 		}
 
 		
