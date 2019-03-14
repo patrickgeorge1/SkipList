@@ -10,19 +10,19 @@ using namespace std;
 void solve(int &drivers, int &races, int &prints) {
 	cout << "Drivers = 5 --   Races = 6 --  Prints = 2" << endl;
 		//cout << " 3  1  0    and enter 12 23 34 " << endl;
-	//cin >> drivers >> races >> prints;
-		drivers = 5;
-		races = 6;
-		prints = 3;
+	cin >> drivers >> races >> prints;
 		int first_print = 1;
 
 	int *laps = new int[drivers+1];                         // pt o mai usoara indexare de la 1
 	int *laps_ant = new int[drivers+1]; 
 	int *points = new int[drivers+1];
 	int *car_from_points = new int[drivers+1];
-	int *deltas = new int[drivers+1];
+	int *clasament_vechi = new int[drivers+1];
 
-
+	for (int i = 1; i <= drivers; ++i)
+	{
+		clasament_vechi[i]  = 0;
+	}
 
 
 	for (int i = 0; i < drivers+1; ++i)
@@ -81,13 +81,11 @@ void solve(int &drivers, int &races, int &prints) {
 
 				laps_ant[z] = laps[z];
 				car_from_points[z] = points[z];
-				//cout << "@@ masina  " << z << " a obtinut " << points[z] << endl; 
 			}
 
 		}
 		else
 		{
-			cout << "Have to print!" << endl;
     		int *display = new int[drivers+1];
 
     		for (int i = 1; i <= drivers; ++i)
@@ -121,14 +119,31 @@ void solve(int &drivers, int &races, int &prints) {
 					cout << display[i] << " " << points[display[i]] <<" 0"<<endl;
 
 				}
+				for (int i = 1; i <= drivers; ++i)
+				{
+					clasament_vechi[display[i]] = i;
+
+				}
+
 				first_print = 0;
 			}
 			else
 			{
+				int clasament_nou[drivers+1];
 				for (int i = 1; i <= drivers; ++i)                      // modific aici
 				{
-					cout << display[i] << " " << points[display[i]] <<" "<<deltas[i]<<endl;
+					clasament_nou[display[i]] = i;
+				}
 
+				for (int i = 1; i <= drivers; ++i)                      // modific aici
+				{
+					cout << display[i] << " " << points[display[i]] <<" "<<clasament_vechi[display[i]] - clasament_nou[display[i]]<<endl;
+
+				}
+
+				for (int i = 1; i <= drivers; ++i)                      // modific aici
+				{
+					clasament_vechi[display[i]] = i;
 				}
 
 			}
@@ -144,6 +159,6 @@ void solve(int &drivers, int &races, int &prints) {
 	delete[] laps;
 	delete[] laps_ant;
 	delete[] points;
-	delete[] deltas;
+	delete[] clasament_vechi;
 	delete[] car_from_points;
 }
