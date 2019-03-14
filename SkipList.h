@@ -99,7 +99,11 @@ public:
 		delete[] address;
 	}
 // fara trisat
-	void search() {
+	void search(int drivers, int laps[], int laps_ant[]) {
+		int *times = new int[drivers+1];
+		int *car_ind = new int[drivers+1];
+		int i = 1;
+
 		Node *now = head;
 		for (int i = 1; i <= height; ++i)
 		{
@@ -107,11 +111,55 @@ public:
 		}
 		now = now->next;
 		cout << endl;
+
+
 		while(now->next != nullptr)          // dupa asta now va fi pe ult element
 		{
-			cout << now->data.time << endl;
+			//cout << now->data.car_index <<" " <<now->data.time<< endl;
+			times[i] = now->data.time;
+			car_ind[i] = now->data.car_index;
 			now = now->next;
+			i++;
 		}
+
+
+
+
+		int x = times[1];
+		laps[1] = car_ind[1];
+		for (int i = 2; i <= drivers; ++i)
+		{
+			int y = times[i];
+			if(y == x)     // au scos acc timp si sunt consecutive 
+			{
+				int car1 = 0;
+				int car2 = 0;
+				int num = 1;
+
+				while (car1==0 && car2==0 && num <= drivers) {
+					if(laps_ant[num] == car_ind[i]) car2 = 1, laps[i-1] = car_ind[i], laps[i] = car_ind[i-1]; // y
+					if(laps_ant[num] == car_ind[i-1]) car1 = 1, laps[i-1] = car_ind[i-1], laps[i] = car_ind[i]; // x
+
+					num++;
+				}
+			}
+			else
+			{
+				laps[i] = car_ind[i];
+			}
+
+			x = y;
+		}
+
+
+		for (int i = 1; i <= drivers; ++i)
+		{
+			cout << "zzzzz lap " << laps[i]<<endl;
+			//cout << "zzzzz car " << car_ind[i] << " on time " << times[i]<<endl;
+		}
+
+		delete[] times;
+		delete[] car_ind;
 		//cout << now->data.time << endl;
 	}
 
