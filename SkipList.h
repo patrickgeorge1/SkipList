@@ -110,7 +110,6 @@ public:
 			now = now->down;
 		}
 		now = now->next;
-		cout << endl;
 
 
 		while(now->next != nullptr)          // dupa asta now va fi pe ult element
@@ -122,42 +121,41 @@ public:
 			i++;
 		}
 
-
-
-
-		int x = times[1];
-		laps[1] = car_ind[1];
-		for (int i = 2; i <= drivers; ++i)
+		for (int i = 1; i <= drivers; ++i)
 		{
-			int y = times[i];
-			if(y == x && x != 1001)     // au scos acc timp si sunt consecutive 
+			for (int j = i + 1; j <= drivers; ++j)
 			{
-				int car1 = 0;
-				int car2 = 0;
-				int num = 1;
-
-				while (car1==0 && car2==0 && num <= drivers) {
-					if(laps_ant[num] == car_ind[i]) car2 = 1, laps[i-1] = car_ind[i], laps[i] = car_ind[i-1]; // y
-					if(laps_ant[num] == car_ind[i-1]) car1 = 1, laps[i-1] = car_ind[i-1], laps[i] = car_ind[i]; // x
-
-					num++;
+				if (times[i] > times[j]) {
+					swap(times[i], times[j]);
+					swap(car_ind[i], car_ind[j]);
+				}
+				if (times[i] == times[j]) {
+					int oki = 0;
+					int okj = 0;
+					int p = 1;
+					while (oki == 0 && okj == 0 && p <= drivers)
+					{
+						if(laps_ant[p] == car_ind[i]) oki = 1;
+						if(laps_ant[p] == car_ind[j]) okj = 1;
+						p++;
+					}
+					if(okj == 1) {
+						swap(times[i], times[j]);
+						swap(car_ind[i], car_ind[j]);
+					}
 				}
 			}
-			else
-			{
-				laps[i] = car_ind[i];
-			}
 
-			x = y;
 		}
-
 
 		for (int i = 1; i <= drivers; ++i)
 		{
-			//cout << "zzzzz lap " << laps[i]<<endl;
-			//cout << "zzzzz car " << car_ind[i] << " on time " << times[i]<<endl;
+			laps[i] = car_ind[i];
 		}
 
+
+
+		
 		delete[] times;
 		delete[] car_ind;
 		//cout << now->data.time << endl;
