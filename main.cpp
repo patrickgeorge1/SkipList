@@ -2,13 +2,13 @@
 
 #include "SkipList.h"
 
-
 using namespace std;
 
-int main () {
+int main()
+{
 
-	int drivers, races, prints;
-	solve(drivers, races, prints);
+    int drivers, races, prints;
+    solve(drivers, races, prints);
 
-	return 0;
+    return 0;
 }
