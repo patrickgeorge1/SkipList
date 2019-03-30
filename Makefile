@@ -1,6 +1,11 @@
-build:
-	g++ main.cpp SkipList.cpp -o tema1
+buildd:
+	g++ main.cpp -std=gnu++0x SkipList.cpp -o tema1
 	./tema1
+build:
+	g++ main.cpp -std=gnu++0x SkipList.cpp -o tema1
+
+dif:
+	diff races.out ref/test6.out
 
 valgrind:
 	g++ main.cpp SkipList.cpp -o tema1

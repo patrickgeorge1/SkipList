@@ -1,14 +1,13 @@
-  // Copyright 2019 <Vitoga Geogege Patrick>
-#ifndef _HOME_PATRICK_DESKTOP_SKIPLIST_FAC1_SKIPLIST_H_
-#define _HOME_PATRICK_DESKTOP_SKIPLIST_FAC1_SKIPLIST_H_
-
+// Copyright 2019 <Vitoga Geogege Patrick>
 #include <iostream>
 #include <ctime>
+
+using namespace std;
 
 struct Dictionary {
     int time;
     int car_index;
-    explicit Dictionary(int car_index = -1, int time = -1) {
+    Dictionary(int car_index = -1, int time = -1) {
         this -> time = time;
         this -> car_index = car_index;
     }
@@ -20,7 +19,7 @@ struct Node {
     Node * prev;
     Node * up;
     Node * down;
-    explicit Node(Dictionary data) {
+    Node(Dictionary data) {
         next = nullptr;
         prev = nullptr;
         up = nullptr;
@@ -30,16 +29,17 @@ struct Node {
 };
 
 class SkipList {
- private:
-    Node * head;
+    private:
+        Node * head;
     Node * tail;
     int height;
     Node ** address;
     int index_address;
     int drivers;
 
- public:
-        explicit SkipList(int drivers) {
+    public:
+
+        SkipList(int drivers) {
             this -> drivers = drivers;
             height = 0;
             Dictionary data1(0, -1);
@@ -58,13 +58,6 @@ class SkipList {
             index_address += 2;
         }
 
-    void swapp(int &a, int&b) {
-        int aux = a;
-        a = b;
-        b = aux;
-        b = aux;
-    }
-
     void remove_column(Node * botom) {
             Node * iterator = botom -> up;;
             Node * save = iterator;
@@ -74,34 +67,35 @@ class SkipList {
                 iterator = iterator -> up;
             }
             delete save;
+
         }
 
         ~SkipList() {
-              // Node *now_head = head;      // cu asta oarcurg pe vert
-              // Node *bottom = head;
-              // while (now_head != nullptr) {
-              // 	bottom = now_head;
-              // 	now_head = now_head->down;
-              // }
-              // bottom = bottom->next;
-              // Node *last = bottom;
-              // while(bottom != nullptr) {
-              // 	remove_column(bottom->prev);
-              // 	last = bottom;
-              // 	bottom = bottom->next;
-              // }
-              // remove_column(last);
-              // delete head;
-              // delete tail;
+            // Node *now_head = head;    // cu asta oarcurg pe vert
+            // Node *bottom = head;
+            // while (now_head != nullptr) {
+            // 	bottom = now_head;
+            // 	now_head = now_head->down;
+            // }
+            // bottom = bottom->next;
+            // Node *last = bottom;
+            // while(bottom != nullptr) {
+            // 	remove_column(bottom->prev);
+            // 	last = bottom;
+            // 	bottom = bottom->next;
+            // }
+            // remove_column(last);
+            // delete head;
+            // delete tail;
 
-              // Safe delete
+            // Safe delete
 
             for (int i = 0; i < drivers * drivers; ++i) {
                 delete address[i];
             }
             delete[] address;
         }
-      // fara trisat
+    // fara trisat
     void search(int drivers, int laps[], int laps_ant[]) {
         int * times = new int[drivers + 1];
         int * car_ind = new int[drivers + 1];
@@ -113,9 +107,9 @@ class SkipList {
         }
         now = now -> next;
 
-        while (now -> next != nullptr)   // dupa asta now va fi pe ult element
+        while (now -> next != nullptr) // dupa asta now va fi pe ult element
         {
-            // cout << now->data.car_index <<" " <<now->data.time<< std::endl;
+            //cout << now->data.car_index <<" " <<now->data.time<< endl;
             times[i] = now -> data.time;
             car_ind[i] = now -> data.car_index;
             now = now -> next;
@@ -125,8 +119,8 @@ class SkipList {
         for (int i = 1; i <= drivers; ++i) {
             for (int j = i + 1; j <= drivers; ++j) {
                 if (times[i] > times[j]) {
-                    swapp(times[i], times[j]);
-                    swapp(car_ind[i], car_ind[j]);
+                    swap(times[i], times[j]);
+                    swap(car_ind[i], car_ind[j]);
                 }
                 if (times[i] == times[j]) {
                     int oki = 0;
@@ -138,11 +132,12 @@ class SkipList {
                         p++;
                     }
                     if (okj == 1) {
-                        swapp(times[i], times[j]);
-                        swapp(car_ind[i], car_ind[j]);
+                        swap(times[i], times[j]);
+                        swap(car_ind[i], car_ind[j]);
                     }
                 }
             }
+
         }
 
         for (int i = 1; i <= drivers; ++i) {
@@ -151,11 +146,10 @@ class SkipList {
 
         delete[] times;
         delete[] car_ind;
-        // cout << now->data.time << std::endl;
+        //cout << now->data.time << endl;
     }
 
-    void add_beetween(Dictionary data) {
-    // introduc timp si index, timpul in mod principal
+    void add_beetween(Dictionary data) { // introduc timp si index, timpul in mod principal
         Node * added = new Node(data);
         added -> next = tail;
         added -> prev = tail -> prev;
@@ -163,28 +157,28 @@ class SkipList {
         tail -> prev = added;
         address[index_address] = added;
         index_address++;
+
     }
 
     void add(Dictionary data) {
         Node * added = new Node(data);
         Node * up_left = head;
         if (height != 0) {
-            // cout << "already one floor" << std::endl;
+            //cout << "already one floor" << endl;
             Node * last = up_left;
             while (up_left != nullptr) {
-                // cout <<std::endl << "entered once vertical" << std::endl;
+                //cout <<endl << "entered once vertical" << endl;
                 while (up_left -> next -> data.time < added -> data.time) {
-                    // cout <<std::endl << "entered
-                    // once orizontal" << std::endl;
+                    //cout <<endl << "entered once orizontal" << endl;
                     up_left = up_left -> next;
                 }
                 last = up_left;
 
-                // cout << "inainte de ultima coborare" << std::endl;
+                //	cout << "inainte de ultima coborare" << endl;
                 up_left = up_left -> down;
-                // cout << "dupa ultima coborare" << std::endl;
+                //	cout << "dupa ultima coborare" << endl;
             }
-              //  trebuie sa inserez in dreapta nodului last
+            //   trebuie sa inserez in dreapta nodului last
             address[index_address] = added;
             index_address++;
             added -> next = last -> next;
@@ -192,10 +186,11 @@ class SkipList {
             last -> next -> prev = added;
             last -> next = added;
 
-              // sa i fac etaje
+            // sa i fac etaje
             int i = 0;
-            while (flip_coin() && i <= height)   // construiesc etaje
+            while (flip_coin() && i <= height) // construiesc etaje
             {
+                //cout << endl << "floor "<< i+1 << "for "<< added->data.time  <<endl;
                 Node * floor = new Node(data);
                 floor -> down = added;
                 added -> up = floor;
@@ -203,10 +198,12 @@ class SkipList {
                 address[index_address] = added;
                 index_address++;
                 i++;
+
             }
             int number_of_links = i;
-            int ok = 0;   // nu am construit un etaj extra
-            if (height < i) {   // daca cumva fac un nivel in plus
+            int ok = 0; // nu am construit un etaj extra
+            if (height < i) { // daca cumva fac un nivel in plus
+                //cout << "setting margins for now floor of "<< added->data.time << endl;
                 Dictionary data1(0, -1);
                 Dictionary data2(0, 10001);
                 Node * head_s = new Node(data1);
@@ -221,16 +218,14 @@ class SkipList {
                 added -> next = head_d;
                 head_d -> down = tail;
                 head_d -> prev = added;
-                head = head_s;   // head si tail updatate
-                tail = head_d;   // cel mai inalt floor este linkat
-                ok = 1;   // am construit un etaj extra
+                head = head_s; // head si tail updatate
+                tail = head_d; // cel mai inalt floor este linkat
+                ok = 1; // am construit un etaj extra
             }
-            height = i;   // updatez inaltimea generala
-              // linkez florul nou cu cele vechi
+            height = i; // updatez inaltimea generala
+            // linkez florul nou cu cele vechi
             Node * iterator_head = head;
-            if (ok) {
-            // cobor la nivelul de la care
-            // trebuie sa incep linkarile
+            if (ok) { // cobor la nivelul de la care trebuie sa incep linkarile
                 number_of_links--;
                 added = added -> down;
                 iterator_head = iterator_head -> down;
@@ -240,29 +235,29 @@ class SkipList {
                     iterator_head = iterator_head -> down;
                 }
             }
-            // pe added am pe cea mai inalta
-            // iar pe iterator_head, inceputul corespunzator
+            // pe added am pe cea mai inalta iar pe iterator_head, inceputul corespunzator
             for (int i = 1; i <= number_of_links; ++i) {
-                  // conectez
+                // conectez
                 Node * iterator_orizontal = iterator_head;
-                while (iterator_orizontal -> next -> data.time
-                < added -> data.time)
-                // caut sa vad unde inserez
+                while (iterator_orizontal -> next -> data.time < added -> data.time) // caut sa vad unde inserez
                 {
                     iterator_orizontal = iterator_orizontal -> next;
                 }
+                //cout << added->data.time << " was inserted on line "<< i << " in stanga lui " << iterator_orizontal->data.time<<endl;
                 added -> next = iterator_orizontal -> next;
                 added -> prev = iterator_orizontal;
                 iterator_orizontal -> next -> prev = added;
                 iterator_orizontal -> next = added;
 
-                  // cobor
+                // cobor
                 iterator_head = iterator_head -> down;
                 added = added -> down;
             }
 
-        } else {   // checked pune bine pe primul
+        } else // checked pune bine pe primul
+        {
             while (up_left -> next -> data.time < added -> data.time) {
+                //cout <<endl << "entered once orizontal --" << endl;
                 up_left = up_left -> next;
             }
             up_left -> next -> prev = added;
@@ -273,7 +268,7 @@ class SkipList {
             up_left -> next = added;
             int i = 0;
             while (flip_coin() && i <= height) {
-                // cout << std::endl << "new floor" <<std::endl;
+                //cout << endl << "new floor" <<endl;
                 Node * floor = new Node(data);
                 floor -> down = added;
                 added -> up = floor;
@@ -281,9 +276,10 @@ class SkipList {
                 address[index_address] = added;
                 index_address++;
                 i++;
+
             }
             if (height < i) {
-                // cout << "setting margins for now floor" << std::endl;
+                //cout << "setting margins for now floor" << endl;
                 Dictionary data1(0, -1);
                 Dictionary data2(0, 10001);
                 Node * head_s = new Node(data1);
@@ -300,20 +296,21 @@ class SkipList {
                 head_d -> prev = added;
                 head = head_s;
                 tail = head_d;
+
             }
             height = i;
+            //cout << "numbers of floors except base = " << height<< endl;	
         }
+
     }
 
     int flip_coin() {
         srand((unsigned) time(0));
-        unsigned int x = 13;
-        unsigned int *seed = &x;
-        int i = (rand_r(seed) % 2);
-        // std::cout << i << std::endl;
+        int i = (rand() % 2);
+        //cout << i << endl;
         return i;
     }
 };
 
 void solve(int & drivers, int & races, int & prints);
-#endif  // _HOME_PATRICK_DESKTOP_SKIPLIST_FAC1_SKIPLIST_H_
+// void print(int points[20001]) -- descrescator

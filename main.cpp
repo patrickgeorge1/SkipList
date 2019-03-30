@@ -1,12 +1,10 @@
+// Copyright 2019 <Vitoga Geogege Patrick>
 #include <iostream>
 
 #include "SkipList.h"
 
-using namespace std;
 
-int main()
-{
-
+int main() {
     int drivers, races, prints;
     solve(drivers, races, prints);
 
